@@ -1,3 +1,8 @@
+*/
+Function to remove duplicates
+*/
+
+
 int remove_duplicate(int a[],int n){
         // code here
         int ans=0;
