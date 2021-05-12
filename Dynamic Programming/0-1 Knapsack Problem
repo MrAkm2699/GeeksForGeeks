@@ -20,7 +20,7 @@ values[] = {1,2,3}
 weight[] = {4,5,6}
 Output: 0
 
-************CODE**************
+**********CODE*********
 class Solution
 {
     public:
@@ -28,15 +28,23 @@ class Solution
     int knapSack(int W, int wt[], int val[], int n) 
     { 
        // Your code here
+       //sort(wt,wt+n);
        int t[n+1][W+1];
-       memset(a,0,sizeof(a));
+       memset(t,0,sizeof(t));       //FOR 0TH ROWS AND COLUMNS VALUES WILL BE ZERO
        
        for(int i=1;i<=n;i++)
        {
            for(int j=1;j<=W;j++)
            {
-               if()
+               if(wt[i-1]>j)
+                t[i][j]=t[i-1][j];
+                
+                else{
+                    t[i][j]= max(t[i-1][j], val[i-1] + t[i-1][j-wt[i-1]]);  //GET THE MAX FROM [ SAME WEIGHT PREVIOUS ROW INDEX VALUE, 
+                                                                                                CURRENT VALUE OF WEIGHT + REMAINING WEIGHT AFTER SUBTRACTING CURRENT WEIGHT(FROM PREV ROW INDEX)]
+                }
            }
        }
+       return t[n][W];
     }
 };
