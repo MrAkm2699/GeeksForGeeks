@@ -26,9 +26,10 @@ and {5,5}.
     {
         long long int a[m+1][n+1];
         memset(a,0,sizeof(a));
-        for(int i=0;i<m+1;i++)
         
         //------below is initialization---------
+               
+        for(int i=0;i<m+1;i++)
         for(int j=0;j<n+1;j++)
         {
             if(j==0)
