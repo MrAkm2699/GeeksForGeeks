@@ -24,7 +24,7 @@ number of multiplications are 10*30*5 + 10*5*60
 = 4500.
 
 
-****************CODE***************(memoized code)
+****************CODE***************(BOTTOM-UP code)
 
 class Solution{
 public:
