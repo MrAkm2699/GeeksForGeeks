@@ -1,0 +1,9 @@
+int Search(vector<int> vec, int K) {
+    //code her
+    for(int i=0; i<vec.size(); i++)
+    {
+        if(vec[i]==K)
+            return i;
+    }
+    return -1;
+}
