@@ -1,0 +1,85 @@
+*******************COMMON FROM 2 ARRAYS **********AGAIN GFG COMPILER SUCKS
+
+The intersection of two arrays contains the elements common to both the arrays. The intersection should not count duplicate elements.
+Given two sorted arrays arr1[] and arr2[] of sizes N and M respectively. Find their intersection
+
+ 
+
+Example 1:
+
+Input: 
+N = 4, arr1[] = {1, 2, 3, 4}  
+M = 5, arr2 [] = {2, 4, 6, 7, 8}
+Output: 2 4
+Explanation: 2 and 4 are only common 
+elements in both the arrays.
+ 
+
+Example 2:
+
+Input: 
+N = 5, arr1[] = {1, 2, 2, 3, 4}
+M = 6, arr2[] = {2, 2, 4, 6, 7, 8}
+Output: 2 4
+Explanation: 2 and 4 are the only 
+common elements.
+
+
+***********CODE USING SET**********PASSED********************
+  vector<int> printIntersection(int arr1[], int arr2[], int N, int M) 
+    { 
+        //Your code here
+        int j1= 0, j2 = 0;
+vector<int>v;
+set<int> s1;
+while(j1 < N && j2 < M)
+{
+if(arr1[j1] == arr2[j2])
+{
+s1.insert(arr1[j1]);
+j1++; j2++;
+}
+else if(arr1[j1] < arr2[j2])
+{
+j1++;
+}
+else
+{
+j2++;
+}
+
+}
+
+for(auto i : s1)
+{
+v.push_back(i);
+}
+
+return v;
+
+*************************NORMAL CODE GIVES ERROR BUT ITS RIGHT********PASSED ALL CASES MANUALLY***************
+vector<int>v;
+        
+         int i=0,j=0;
+        while(i<N && j<M){
+            if(arr1[i]==arr1[i+1])
+                i++;
+            if(arr2[i]==arr2[i+1])
+                j++;
+            if(arr1[i]>arr2[j])
+            {
+                j++;
+            }
+            else
+                if(arr1[i]<arr2[j]) 
+                    i++;
+            else 
+                {
+                    v.push_back(arr1[i]);
+                    i++;j++;
+                }
+        }
+        if(v.size()==0)
+            return {-1 };
+        
+        return v;
