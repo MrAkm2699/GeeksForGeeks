@@ -1,0 +1,35 @@
+***************QUICK SORT************UNSTABLE*****FASTEST BUT NOT BETTER IN OTHER CASES******
+
+
+
+
+
+********CODE**********
+int partition (int arr[], int low, int high)
+    {
+       // Your code here
+       int pivot=arr[high];
+       int start=low;
+       
+       for(int i=low;i<high;i++)
+       {
+           if(arr[i]<=pivot)
+           {
+               swap(arr[start],arr[i]);
+               start++;
+           }
+       }
+       swap(arr[high],arr[start]);
+       return start;
+    }
+    
+     void quickSort(int arr[], int low, int high)
+    {
+        // code here
+         if(low<high)
+       {
+           int index=partition(arr,low,high);
+           quickSort(arr,low,index-1);
+           quickSort(arr,index+1,high);
+       }
+    }
