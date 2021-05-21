@@ -1,0 +1,90 @@
+************************min swaps to make a sorted array***************2 approach***1)graph******2)sel sort(TLE)
+
+Given an array of n distinct elements. Find the minimum number of swaps required to sort the array in strictly increasing order.
+
+
+Example 1:
+
+Input:
+nums = {2, 8, 5, 4}
+Output:
+1
+Explaination:
+swap 8 with 4.
+Example 2:
+
+Input:
+nums = {10, 19, 6, 3, 5}
+Output:
+2
+Explaination:
+swap 10 with 3 and swap 19 with 5.
+
+
+*****************CODE(sel sort)************
+	int minSwaps(vector<int>&nums)
+	{
+	    // Code here
+	   
+	    
+	    int m,ans=0;
+	    for(int i=0;i<nums.size();i++)
+	    {
+	        m=i;
+	        
+	        for(int j=i+1;j<nums.size();j++)
+	        {
+	            if(nums[j]<nums[m])
+	            {
+	                m=j;
+	            }
+	        }
+	        if(m!=i)
+	         ans++;
+	        swap(nums[i],nums[m]);
+	    }
+	    return ans;
+	    
+	}
+  
+  ************************CODE(GRAPH)**************
+  int minSwaps(int arr[], int N)
+{
+    pair<int, int=""> arrPos[N]; 
+    for (int i = 0; i < N; i++) 
+    { 
+        arrPos[i].first = arr[i]; 
+        arrPos[i].second = i; 
+    }
+    
+    sort(arrPos, arrPos + N); 
+    
+    vector<bool> visited(N, false); 
+    
+    int ans = 0;
+    
+    for(int i = 0; i < N; i++)
+    {
+        if (visited[i] == true || arrPos[i].second == i) 
+        {
+            continue;
+        }
+        
+        int cycle_size = 0; 
+        int j = i; 
+        
+        while (!visited[j]) 
+        { 
+            visited[j] = 1; 
+            
+            j = arrPos[j].second; 
+            cycle_size++; 
+        } 
+        
+        if (cycle_size > 0) 
+        { 
+            ans += (cycle_size - 1); 
+        } 
+    }
+    return ans;
+}
