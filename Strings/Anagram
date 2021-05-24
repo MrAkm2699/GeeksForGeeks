@@ -1,0 +1,55 @@
+*******************if one string is not present in other**********
+Given two strings a and b consisting of lowercase characters. The task is to check whether two given strings are an anagram of each other or not. An anagram of a string is another string that contains the same characters, only the order of characters can be different. For example, “act” and “tac” are an anagram of each other.
+
+Example 1:
+
+Input:
+a = geeksforgeeks, b = forgeeksgeeks
+Output: YES
+Explanation: Both the string have same
+characters with same frequency. So, 
+both are anagrams.
+Example 2:
+
+Input:
+a = allergy, b = allergic
+Output: NO
+Explanation:Characters in both the strings
+are not same, so they are not anagrams.
+
+**********************CODE****************
+bool isAnagram(string a, string b){
+        
+        // Your code here
+        
+        int m[256]={0};
+        int n[256]={0};
+        for(int i=0;i<a.length();i++)
+        {
+            m[a[i]]++;
+        }
+        for(int i=0;i<b.length();i++)
+        {
+            n[b[i]]++;
+        }
+        for(int i=0;i<max(a.length(),b.length());i++)
+        {
+            if(m[a[i]]!=n[a[i]] || m[b[i]]!=n[b[i]])
+                return false;
+        }
+        return true;
+        
+        
+        
+  ****************ANOTHER ONE****************
+  if(a.size()!=b.size())
+            return false;
+        sort(a.begin(),a.end());
+        sort(b.begin(),b.end());
+        for(int i=0;i<a.length();i++)
+        {
+            if(a[i]!=b[i])
+                return false;
+        }
+        return true;
+    }
