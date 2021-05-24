@@ -1,0 +1,42 @@
+****************searching pattern in text************
+Naive Pattern Searching: The idea is to slide the pattern over text one by one and check for a match. If a match is found, then slides by 1 again to check for subsequent matches.
+That is check for the match of the first character of the pattern in the string, if it matches then check for the
+subsequent characters of the pattern with the respective characters of the string. If a mismatch is found then move forward in the string.
+Examples:
+Input:  txt[] = "THIS IS A TEST TEXT"
+        pat[] = "TEST"
+Output: Pattern found at index 10
+
+Input:  txt[] =  "AABAACAADAABAABA"
+        pat[] =  "AABA"
+Output: Pattern found at index 0
+        Pattern found at index 9
+        Pattern found at index 12
+        
+****************CODE****************
+void search(char* pat, char* txt)
+{
+    int M = strlen(pat);
+    int N = strlen(txt);
+
+    /* A loop to slide pat[] one by one */
+    for (int i = 0; i <= N - M; i++) {
+        int j;
+
+        /* For current index i, check for pattern match */
+        for (j = 0; j < M; j++)
+            if (txt[i + j] != pat[j])
+                break;
+
+        if (j == M) // if pat[0...M-1] = txt[i, i+1, ...i+M-1]
+            cout << "Pattern found at index "
+                 << i << endl;
+    }
+}
+int main()
+{
+    char txt[] = "AABAACAADAABAAABAA";
+    char pat[] = "AABA";
+    search(pat, txt);
+    return 0;
+}
