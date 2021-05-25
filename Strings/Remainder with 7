@@ -1,0 +1,24 @@
+Given a number as string(n) , find the remainder of the number whe it is divided by 7
+
+Example 1:
+
+Input:
+9
+Output:
+2
+
+*****************CODE***************
+int remainderWith7(string n)
+    {
+        //Your code here
+        int ans=0;
+        for(int i=0;i<n.size();i++)
+        {
+            ans=ans*10 + int(n[i] - '0');                     //ans=ans*10 + (n[i] - '0')        is also correct
+            ans=ans%7;
+        }
+         return ans;
+    }
+
+
+
