@@ -1,0 +1,35 @@
+************missing alphabets from a-z in the input***************
+You are given a string s. You need to find the missing characters in the string to make a panagram.
+Note: The output characters will be lowercase and lexicographically sorted.
+Example 1:
+Input:
+s = Abcdefghijklmnopqrstuvwxy
+Output: z
+EXample 2:
+Input:
+s = Abc
+Output: defghijklmnopqrstuvwxyz
+
+
+***********CODE************
+string missingPanagram(string str){
+        
+    int n=str.length();
+     string res="";
+     //sort(str.begin(),str.end());
+     int a[256]={0};
+     for(int i=0;i<n;i++)
+     {
+         a[tolower(str[i]) - 'a']++;
+     }
+     for(int i=0;i<26;i++)
+     {
+         if(a[i]==0)
+         {
+             res+= char(i)+'a';
+         }
+     }
+     if(res=="")
+        return "-1";
+     return res;
+    }
