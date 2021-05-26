@@ -1,0 +1,62 @@
+**************NICE QUESTION**************
+Given a string S, find the length of its longest substring that does not have any repeating characters.
+Example 1:
+Input:
+S = geeksforgeeks
+Output: 7
+Explanation: The longest substring
+without repeated characters is "ksforge".
+
+
+***************CODE-1***********
+int SubsequenceLength (string s) 
+    {
+        int n=s.length();
+        int ans=1;
+        int k=0;
+        int c=1;
+        int j;
+        if(n==0)
+            return 0;
+        for(int i=1;i<n;i++)
+        {
+            
+            for(j=k;j<i;j++)
+            {
+                if(s[i]==s[j])
+                    break;
+            }
+            if(i==j)
+                c++;
+            else{
+                k=j+1;
+                c=i-j;   
+            }
+            ans=max(ans,c);
+            
+            
+        }
+        return ans;
+    }
+    
+*************************CODE-2***********SMART CODE******
+ int SubsequenceLength (string s) 
+    {
+        int n=s.length();
+        int ans=0;
+        int start =-1;
+        vector<int>dict(256,-1);
+        if(n==0)
+            return 0;
+        for(int i=0;i<n;i++)
+        {
+            if(dict[s[i]] > start)
+            {
+                start=dict[s[i]];
+            }
+            dict[s[i]]=i;
+            ans=max(ans,i-start);
+        }
+        return ans;
+    }
+
