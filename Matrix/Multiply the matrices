@@ -63,3 +63,31 @@ which results in 1 x 1 matrix having element 6.
         return ans;
     
     }
+***********************CODE-2********************
+vector<vector<int> > multiplyMatrix( const vector<vector<int> >& A, const vector<vector<int> >& B)
+    {
+            
+            vector<vector<int>> ans(A.size(),vector<int> (B[0].size()));
+            int row1 = A.size();
+            int col1 = A[0].size();
+            int row2 = B.size();
+            int col2 = B[0].size();
+                if(col1!=row2)
+                {
+                    vector<vector<int>> v;
+                    return v;
+                }
+        for(int i=0;i<row1;i++)
+        {
+            vector<int>v;
+            for(int j=0;j<col2;j++)
+            {
+                int t=0;
+                for(int k=0;k<col1;k++)
+                {
+                    ans[i][j]+=(A[i][k]*B[k][j]);     
+                } 
+            }
+        }
+        return ans;
+    }
