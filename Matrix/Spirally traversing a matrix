@@ -1,0 +1,77 @@
+******************SPIRAL TRAVERSAL**************
+
+
+
+
+******************CODE********************
+vector<int> spirallyTraverse(vector<vector<int> > matrix, int r, int c) 
+    {
+        vector<int>v;
+        int row=0,col=0,nrow=r,ncol=c;
+        while(row<nrow && col<ncol)
+        {
+                
+                for(int j=col;j<ncol;j++)
+                {
+                    v.push_back(matrix[row][j]);
+                }
+                    row++;
+                for(int j=row;j<nrow;j++)
+                {
+                    v.push_back(matrix[j][ncol-1]);
+                }
+                    ncol--;        //nrow--;
+            if(row<nrow)
+                for(int j=ncol-1;j>=col;j--)
+                {
+                    v.push_back(matrix[nrow-1][j]);
+                }
+                    nrow--;
+            if(col<ncol)
+            {
+                for(int j=nrow-1;j>=row;j--)
+                {
+                    v.push_back(matrix[j][col]);
+                }
+                col++;
+            }
+        }
+        
+        
+        
+        /*
+        int row=0,col=0,j=0;
+        while(row<r && col<c)
+        {
+                for(j=col;j<c;j++)
+                {
+                    v.push_back(matrix[row][j]);
+                }
+                    row++;
+                for(j=row;j<r;j++)
+                {
+                    v.push_back(matrix[j][c-1]);
+                }
+                    c--;        //nrow--;
+            if(row<r)
+                for(j=c-1;j>=col;j--)
+                {
+                    v.push_back(matrix[r-1][j]);
+                }
+                    r--;
+            if(col<c)
+            {
+                for(j=r-1;j>=row;j--)
+                {
+                    v.push_back(matrix[j][col]);
+                }
+                col++;
+            }
+        }
+        */
+        
+        
+        
+        return v;
+        
+    }
