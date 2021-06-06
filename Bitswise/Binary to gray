@@ -1,0 +1,29 @@
+***********gray code is*******
+Binary to Gray conversion : 
+The Most Significant Bit (MSB) of the gray code is always equal to the MSB of the given binary code.
+Other bits of the output gray code can be obtained by XORing binary code bit at that index and previous index.
+
+Example 1:
+
+Input: N = 7
+Output: 4
+Explanation: 7 is represented as 111 in 
+binary form. The gray code of 111 is 100, 
+in the binary form whose decimal equivalent 
+is 4.
+Example 2:
+
+Input: N = 10
+Output: 15
+Explanation: 10 is represented as 1010 in 
+binary form. The gray code of 1010 is 1111, 
+in the binary form whose decimal equivalent 
+is 15.
+
+******CODE*******
+int greyConverter(int n)
+    {
+        
+        return (n^n>>1);
+        
+    }
