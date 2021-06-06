@@ -1,0 +1,27 @@
+*********check weather number is power of 2 or not**********
+
+***************code************no. before 8(1000) is 7(0111)****means 1s in 7 == power of no. if true return
+ bool isPowerofTwo(long long n){
+        int p=log2(n);
+        int s=n-1;;
+        int c=0,i=0;
+        while(n>>=1 >0)
+        {
+            if(s&1==1)
+                c++;
+            s>>=1;
+            
+        }
+        if(c == p)
+            return true;
+        return false;
+        
+    }
+    
+    *********************code simple**********no. before 8(1000) is 7(0111) means 8 AND 7 should be zero******
+    bool isPowerofTwo(long long n){
+        if(n==0)
+            return false;
+        return ( (n&(n-1)) == 0) ;
+        
+    }
