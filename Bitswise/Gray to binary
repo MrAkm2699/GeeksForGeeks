@@ -1,0 +1,11 @@
+int grayToBinary(int n)
+    {
+        
+         int k=n;
+         while(n>=1)
+         {
+             n=n>>1;
+             k^=n;
+         }
+        return k;
+    }
