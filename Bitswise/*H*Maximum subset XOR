@@ -1,0 +1,61 @@
+**************MAx subset XOR ***********tough one didnt work*******
+Given an array arr[] of N positive integers. Find an integer denoting the maximum XOR subset value in the given array arr[].
+
+Example 1:
+
+Input : 
+N = 3
+arr[] = {2, 4, 5}
+Output : 7
+Explanation : 
+The subset {2, 5} has maximum 
+subset XOR value.
+Example 2 :
+
+Input : 
+N= 3
+arr[] = {9, 8, 5}
+Output : 13
+Explanation : 
+The subset {8, 5} has maximum 
+subset XOR value.
+
+*************recursive code***************
+int maxSubarrayXOR(int arr[], int N)
+    {
+        
+        memset(dp,-1,sizeof(dp));
+        return xorr(arr, 0, N, 0);
+    }
+    
+        int xorr(int arr[], int a, int n, int i){
+    if(i == n){
+    return a;
+    }
+    // choose and not choose number
+    if(dp[a][i] != -1)
+    return dp[a][i];
+    return dp[a][i] = max( xorr(arr, a^arr[i], n, i+1), xorr(arr, a, n, i+1) );
+    }
+    
+    
+    
+    *******************
+    int solve(int a[],int temp,int n)
+{
+if(n==0)
+return temp;
+if(t[n][temp]!=-1)
+return t[n][temp];
+int res=max(solve(a,(temp^a[n-1]),n-1),solve(a,temp,n-1));
+t[n][temp]=res;
+return res;
+}
+int maxSubarrayXOR(int A[], int n)
+{
+//Your code here
+memset(t,-1,sizeof(t));
+int temp=0;
+return solve(A,temp,n);
+}
+    
