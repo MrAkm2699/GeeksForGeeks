@@ -1,0 +1,34 @@
+***************ques******
+Given an unsigned integer N. The task is to swap all odd bits with even bits. For example, if the given number is 23 (00010111), it should be converted to 43(00101011). 
+Here, every even position bit is swapped with adjacent bit on the right side(even position bits are highlighted in the binary representation of 23), and every odd position bit 
+is swapped with an adjacent on the left side.
+Example 1:
+Input: N = 23
+Output: 43
+Explanation: 
+Binary representation of the given number 
+is 00010111 after swapping 
+00101011 = 43 in decimal.
+
+ANSWER:
+AND on number and even bits A(1010)(odd bits of number gets 0) and shift right by 1 as swap
+AND on number and odd bits 5(0101) and shift left by 1 as swap
+
+then OR both results to get swapped bits answer
+*******************CODE*******************
+
+
+unsigned int swapBits(unsigned int n)
+    {
+    	int even=n & 0xAAAAAAAA;
+    	int odd= n & 0x55555555;
+    	
+    	even>>=1;
+    	odd<<=1;
+    	int ans= (even|odd);
+    	return ans;
+    }
+    
+    //OR
+    
+    // return (((n&42)>>1) | ((n&85)<<1));
