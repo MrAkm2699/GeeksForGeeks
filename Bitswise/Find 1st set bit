@@ -1,0 +1,33 @@
+unsigned int getFirstSetBit(int n)
+    {
+        int c=0; //index
+        if(n==0)
+            return 0;
+        while(n>0)
+        {
+            
+            if( (n&1) == 1)
+            {
+                return c+1;
+                break;
+            }
+            c++;
+            n>>=1;
+        }
+    }
+    
+    
+    
+    
+    OR*********************
+    unsigned int getFirstSetBit(int n){
+
+if(n>=1)
+{
+int a=(n)^(n-1);
+return log2(a+1);
+}
+else
+return 0;
+
+}
