@@ -1,0 +1,38 @@
+***************lexo sorted all substring***********
+You are given a string. You need to print the lexicographically sorted power-set of the string.
+Note: The string s contains lowercase letter of alphabet.
+
+Example 1:
+
+Input:
+s = a
+Output: a
+Explanation: empty string and a 
+are only sets.
+Example 2:
+
+Input:
+s = abc
+Output: a ab abc ac b bc c
+Explanation: empty string, 
+a, ab, abc, ac, b, bc, c 
+are the sets.
+
+********************code**************
+void func(vector<string>&v, string s, string curr,int index)
+{
+    if(index==s.length())
+        {
+            v.push_back(curr);
+            return;
+        }
+    func(v,s,curr,index+1);
+    func(v,s,curr+s[index],index+1);
+}
+//Function to return the lexicographically sorted power-set of the string.
+vector <string> powerSet(string s)
+{
+   vector<string> v;
+   func(v,s,"",0);
+   return v;
+}
