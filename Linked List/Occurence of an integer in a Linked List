@@ -1,0 +1,15 @@
+/*****************find occurence of a integer in a LL****************/
+int count(struct node* head, int search_for)
+    {
+        int ans=0;
+        node *t=head;
+        while(t!=NULL)
+        {
+            if(t->data == search_for)
+            {
+                   ans++;
+            }
+            t=t->next;
+        }
+        return ans;
+    }
