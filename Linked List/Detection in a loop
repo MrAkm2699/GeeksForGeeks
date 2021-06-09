@@ -1,0 +1,35 @@
+/***********************HASHING SOLUTION**************/
+bool detectLoop(Node* h)
+{
+    seen //HashMap 
+    while (h != NULL) 
+    {
+        // If this node is already present
+        // in hashmap it means there is a cycle
+        // (Because you we encountering the
+        // node for the second time).
+        if (seen.find(h) == True)
+            return true
+        // If we are seeing the node for
+        // the first time, insert it in hash
+        seen.insert(h)
+        h = h->next
+    }
+    return false
+}
+
+
+/********************FLOYDS SOLUTION****************/
+bool detectloop(Node* head) 
+{
+    Node *slow_p = head, *fast_p = head
+  
+    while (slow_p && fast_p && fast_p->next) 
+    {
+        slow_p = slow_p->next
+        fast_p = fast_p->next->next
+        if (slow_p == fast_p) 
+            return true 
+    }
+    return false  
+}  
