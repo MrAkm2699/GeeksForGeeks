@@ -1,0 +1,70 @@
+/**************************CODE-1*****************/
+void splitList(Node *head, Node **head1_ref, Node **head2_ref)
+{
+    Node *temp=head;
+    
+    int size=1;
+    while(temp->next!=head){
+        size++;
+        temp=temp->next;
+    }
+   
+    int s1=0,s2=0;
+    if(size%2==0)
+    {
+        s1=size/2;
+        s2=size/2;
+    }
+    else{
+        s2=size/2;
+        s1=size-s2;
+    }
+ 
+    Node*curr=head;
+    *head1_ref=head;
+    s1=s1-1;
+    while(s1--)
+    {
+        curr=curr->next;
+    }
+    *head2_ref=curr->next;
+    curr->next=head;
+    
+    Node* head2=*head2_ref;
+    s2=s2-1;
+    while(s2--)
+    {
+        head2=head2->next;
+    }
+    head2->next= *head2_ref;
+    
+}
+
+
+/*******************************CODE-2*******************/
+void splitList(Node *head, Node **head1_ref, Node **head2_ref)
+{
+    Node *slow = head, *fast = head;
+    
+    while(fast->next != head && fast->next->next != head)
+    {
+        slow = slow->next;
+        fast = fast->next->next;
+    }
+    
+    *head1_ref = head;
+    *head2_ref = slow->next;
+    
+    Node *temp = slow->next;
+    
+    slow->next = head;
+    
+    Node *curr = *head2_ref;
+    
+    while(curr->next != head)
+    {
+        curr=curr->next;
+    }
+    
+    curr->next = *head2_ref;
+}
