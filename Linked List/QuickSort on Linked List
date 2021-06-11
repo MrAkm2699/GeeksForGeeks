@@ -1,0 +1,39 @@
+/*********************************/
+
+/***********************************code**************pivot element is first one*******/
+struct node*partition(struct node*head, struct node*tail)
+{
+    node*prev=head;
+    node*curr=head->next;
+    node*pivot=head;
+    while(curr!=tail->next)
+    {
+        if(curr->data < pivot->data)
+        {
+            swap(curr->data,prev->next->data);
+            prev=prev->next;
+        }
+        curr=curr->next;    
+    }
+    
+    swap(pivot->data,prev->data);
+    return prev;
+}
+
+void quickSortFun(struct node* head, struct node *tail)
+{
+    if(head==NULL || tail==NULL || head==tail)
+        return;
+    struct node* pivot =partition(head, tail);
+    quickSortFun(head,pivot);
+    quickSortFun(pivot->next,tail);
+}
+//you have to complete this function
+void quickSort(struct node **headRef) {
+    node*tail= *headRef;
+    while(tail->next!=NULL)
+    {
+        tail=tail->next;
+    }
+    quickSortFun(*headRef,tail);
+}
