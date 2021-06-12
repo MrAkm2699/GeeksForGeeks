@@ -1,0 +1,19 @@
+/****************only partition code was asked *********NOrmal partition logic*********/
+Node* partition(Node *l, Node *h){
+    Node*curr=l->next;
+    Node*pivot=l;
+    Node*high=l;
+    
+    while(curr != h->next)
+    {
+        if(curr->data < pivot->data)
+        {
+            swap(curr->data,high->next->data);
+            high=high->next;
+        }
+        curr=curr->next;
+    }
+    
+    swap(pivot->data,high->data);
+    return high;
+}
