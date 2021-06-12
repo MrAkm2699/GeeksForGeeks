@@ -1,0 +1,44 @@
+/*************************/
+
+/*************code****************/
+Node *copyList(Node *head) {
+    
+    Node*curr=head;
+    //Node*curr2=head;
+    while(curr!=NULL)                                // to join both the LL
+    {
+        Node *nex=curr->next;
+        curr->next=new Node(curr->data);
+        curr->next->next=nex;
+        curr=nex;
+    }
+    
+    curr=head;
+    while(curr!=NULL)                                 //to connect random pointers abs
+    {
+        if(curr->arb!=NULL)
+        {
+            curr->next->arb=curr->arb->next;
+        }
+        else{
+            curr->next->arb=NULL;
+        }
+        curr=curr->next->next;
+    }
+    
+    Node*newHead= new Node(0);
+    Node*temp=newHead;
+    curr=head;
+    while(curr!=NULL)                                 //to make a clone LL by removing lnks with given LL
+    {
+        /*temp=curr->next->next;
+        curr->next=temp->next;
+        curr=temp;*/
+        temp->next=curr->next;
+        curr->next=temp->next->next;
+        curr=curr->next;
+        temp=temp->next;
+    }
+    
+    return newHead->next;
+}
