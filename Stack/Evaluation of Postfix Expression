@@ -1,0 +1,40 @@
+class Solution
+{
+    public:
+    //Function to evaluate a postfix expression.
+    int evaluatePostfix(string S)
+    {
+        stack<int>m;
+        for(int i=0;i<S.size();i++)
+        {
+            if(isdigit(S[i]))
+            {
+                 m.push(S[i]-'0');
+            }
+            else {
+                int v1=m.top(); 
+                m.pop();
+                int v2=m.top(); 
+                m.pop();
+                
+                if(S[i]=='*')
+                {
+                  m.push(v2*v1); 
+                }
+                else if(S[i]=='+')
+                {
+                  m.push(v2+v1);  
+                }
+                else if(S[i]=='-')
+                {
+                  m.push(v2-v1);  
+                }
+                else if(S[i]=='/')
+                {
+                  m.push(v2/v1);
+                }
+            }
+        }
+        return m.top();
+    }
+};
