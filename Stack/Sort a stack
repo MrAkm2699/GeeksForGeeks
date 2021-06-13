@@ -1,0 +1,21 @@
+//TC=O(n*n)
+void SortedStack :: sort()
+{
+   stack<int>m;
+   while(!s.empty())
+   {
+        int x=s.top();
+        s.pop();
+        while(!m.empty() && m.top()>x)           // for ascending order < x
+        {
+            s.push(m.top());
+            m.pop();
+        }
+        m.push(x);
+   }
+   while(!m.empty())
+   {
+        cout<<m.top()<<" ";
+        m.pop();
+   }
+}
