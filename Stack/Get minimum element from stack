@@ -1,3 +1,5 @@
+/*****************Stack has every element along with, minEle below it, on its top***********************/
+/*******************code******************/
 int _stack :: getMin()
 {
    //Your code here
