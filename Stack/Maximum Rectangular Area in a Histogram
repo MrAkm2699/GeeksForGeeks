@@ -1,0 +1,95 @@
+/********************worked***********/
+long long getMaxArea(long long arr[], int n)
+     {
+    //Function to find largest rectangular area possible in a given histogram.
+    stack<int> st; 
+    long area=0,max=0; 
+    int i=0;
+        while(i<n)
+        { 
+            if(st.empty() || arr[i]>=arr[st.top()] )
+            {
+                st.push(i);
+                i++;
+            }
+        else{
+                 int curr = st.top();
+                 st.pop();
+                area = arr[curr]*(st.empty()?i:(i-1-st.top()));
+                if(area>max)
+                max=area;
+            }
+        }
+        
+        while(!st.empty())
+        {
+            int curr = st.top();st.pop();
+            area = arr[curr]*(st.empty()?n:(i-1-st.top()));
+            if(area>max)
+                max=area;
+        }
+    return max;
+    }
+    
+    /***********************correct but didnt work**************
+    long long getMaxArea(long long arr[], int n)
+    {
+        long long left[n],right[n];//vector<int> left(n),right(n);
+        stack<long long>s;
+        
+        for(long long i=0;i<n;i++)
+        {
+            if(s.empty())
+            {
+                s.push(i);
+                left[i]=0;
+            }
+            else 
+            {
+                while(!s.empty() and ( arr[i] <= arr[s.top()] ) )
+                {
+                    s.pop();    
+                }
+                if(s.empty())
+                    left[i]=0;
+                else 
+                    left[i]=s.top()+1;
+                s.push(i);
+            }
+        }
+        
+        
+        while(!s.empty())
+            s.pop();
+        
+        
+        for(long long i=n-1;i>=0;i--)
+        {
+            if(s.empty())
+            {
+                s.push(i);
+                right[i]=n-1;
+            }
+            else 
+            {
+                while(!s.empty() and ( arr[i] <= arr[s.top()] ) )
+                {
+                    s.pop();    
+                }
+                if(s.empty())
+                    right[i]=n-1;
+                else 
+                    right[i]=s.top()-1;
+                s.push(i);
+            }
+        }
+      
+         long long ans=0;
+        for(long long i=0;i<n;i++)
+        {
+            long long a= arr[i] * ( right[i] - left[i] + 1) ;
+            ans=max(ans, a );
+        }
+          return ans; 
+          }
+          */
