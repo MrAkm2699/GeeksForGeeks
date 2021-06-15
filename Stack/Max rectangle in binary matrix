@@ -1,0 +1,62 @@
+/*************************using max recxtangle in histogram concept ****but placing zeros where element 0s are found**************/
+
+int histogram(int arr[],int m)
+    {
+        stack<int>s;
+        int area=0,i=0;
+        int maxArea=0;
+        while(i<m)
+        {
+            if(s.empty() || arr[i]>=arr[s.top()])
+            {
+                s.push(i);
+                i++;
+            }
+            else
+            {
+                int curr=s.top();   //pop if next is less tall than current
+                s.pop();
+                int len=0;
+                if(s.empty())
+                    len=i;          //len=0;
+                else
+                    len=(i-s.top()-1);
+                area=arr[curr]*len;
+                maxArea=max(maxArea,area);
+            }
+            
+        }
+        while(!s.empty())
+        {
+            int curr=s.top();
+            s.pop();
+            int len=0;
+            if(s.empty())
+                len=m;
+            else
+                len=(i-1-s.top());
+            area=arr[curr]*len;
+            maxArea=max(maxArea,area);
+        }
+        //cout<<"current row Max "<<maxArea;
+        return maxArea;
+    }
+    
+    int maxArea(int M[MAX][MAX], int n, int m) {
+        int res=0,ans=0;
+        int arr[m]={};
+        for(int i=0;i<n;i++)
+        {
+            for(int j=0;j<m;j++)
+            {
+                if(M[i][j]==0)
+                    arr[j]=0;
+                else
+                    arr[j]+=M[i][j];
+                //cout<<arr[j]<<" ";
+            }
+            res = histogram(arr,m);
+            ans=max(res,ans);
+        }
+       return ans;
+    }
