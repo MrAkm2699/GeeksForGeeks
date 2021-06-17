@@ -1,0 +1,70 @@
+/****************************
+Given an infix expression in the form of string str. Convert this infix expression to postfix expression.
+
+Infix expression: The expression of the form a op b. When an operator is in-between every pair of operands.
+Postfix expression: The expression of the form a b op. When an operator is followed for every pair of operands.
+‹Note: The order of precedence is: ^ greater than * equals to / greater than + equals to -. 
+Example 1:
+Input: str = "a+b*(c^d-e)^(f+g*h)-i"
+Output: abcd^e-fgh*+^*+i-
+Explanation:
+After converting the infix expression 
+into postfix expression, the resultant 
+expression will be abcd^e-fgh*+^*+i-
+*/
+
+/**********************CODE*****************/
+ int rank(char a)
+    {
+        if(a=='+' or a=='-')
+            return 1;
+        else if(a=='*' or a=='/')
+            return 2;
+        else if(a=='^')
+            return 3;
+        else return -1;
+        
+    }
+    string infixToPostfix(string s)
+    {
+        stack<char> m;
+        m.push('N');
+        int i=0;
+        int l=s.length();
+        string ans;
+        while(i<l)
+        {
+            if((s[i]>='a' && s[i]<='z') || (s[i] >= 'A' && s[i] <= 'Z'))
+                    ans+=s[i];
+            else if(s[i]=='(')
+                m.push(s[i]);
+            else if(s[i]==')')
+            {
+                while(m.top()!='N' and m.top()!='(')
+                    {
+                        char k=m.top();
+                        m.pop();
+                        ans+=k;   
+                    }
+                    m.pop();
+            }
+            else{
+                while(m.top()!='N' and rank(s[i])<=rank(m.top())  )
+                {
+                    char k=m.top();
+                    m.pop();
+                    ans+=k;
+                }
+                m.push(s[i]);
+            }
+            i++;
+        }
+        
+         while(m.top()!='N')
+                {
+                    char k=m.top();
+                    m.pop();
+                    ans+=k;
+                }
+            return ans;
+    }
