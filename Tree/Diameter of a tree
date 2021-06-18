@@ -9,9 +9,9 @@ int solve(Node*root,int &res)
     int l=solve(root->left,res);
     int r=solve(root->right,res);
     
-   // res=max(1+l+r,res);
-    int temp=max(l,r)+1;              //res=max(res,l+r+1)
-    int ans=max(temp,1+l+r);          // return max(l,r)+1;
+   
+    int temp=max(l,r)+1;      //(answer including root)                //res=max(res,l+r+1)
+    int ans=max(temp,1+l+r);    //(answer doestnt include root)         // return max(l,r)+1;
     res=max(ans,res);
     return temp;
 }
