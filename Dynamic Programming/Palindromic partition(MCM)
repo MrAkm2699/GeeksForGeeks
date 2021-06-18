@@ -9,7 +9,7 @@ are "a", "babbbab", "b", "ababa".
 */
 /********************CODE****MCM variation*************/
 int t[500][500];
-int isPallindrome(string s,int i,int j){
+int isPalindrome(string s,int i,int j){
     if(i==j)
         return 1;
     if(i>j)
@@ -28,14 +28,14 @@ int solve(string str,int i,int j)
         return t[i][j];
     if(i>=j)
         return 0;
-    if(isPallindrome(str,i,j))
+    if(isPalindrome(str,i,j))
         return 0;
         
     int ans = INT_MAX,temp;
     //Loop from i to j-1 because if string is of n then # of partitons could be n-1 only.
     for(int k=i;k<j;k++)
     {
-        if(isPallindrome(str,i,k))
+        if(isPalindrome(str,i,k))
         {
             temp = 1+solve(str,k+1,j);
             ans = min(ans,temp);
