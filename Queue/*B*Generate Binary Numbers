@@ -1,0 +1,53 @@
+/****************************************
+Given a number N. The task is to generate and print all binary numbers with decimal values from 1 to N.
+Example 1:
+Input:
+N = 2
+Output: 
+1 10
+Explanation: 
+Binary numbers from
+1 to 2 are 1 and 10.
+*/
+
+
+/*************CODE***************/
+vector<string> generate(int N)
+{
+	vector<string>v;
+	queue<string>q;
+	q.push("1");
+	for(int i=1;i<=N;i++)
+	{
+	    string k=q.front();
+	    v.push_back(k);
+	    q.pop();
+	    q.push(k+"0");
+	    q.push(k+"1");
+	}
+	return v;
+}
+
+/**************CODE-2***********
+vector<string> generate(int N)
+{
+    vector<string>v;
+    for(int i=1;i<=N;i++)
+    {
+        string s="";
+        int num=i;
+        while(num>0)
+        {
+            char k;
+            if(num&1==1)
+                k='1';
+            else
+                k='0';
+            s=k+s;
+            num=num>>1;
+        }
+        v.push_back(s);
+    }
+    return v;
+}
+*/
