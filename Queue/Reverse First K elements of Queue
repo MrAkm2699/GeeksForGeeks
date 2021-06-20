@@ -1,0 +1,36 @@
+/************************
+Given an integer K and a queue of integers, we need to reverse the order of the first K elements of the queue, leaving the other elements in the same relative order.
+Example 1:
+Input:
+5 3
+1 2 3 4 5
+Output: 
+3 2 1 4 5
+Explanation: 
+After reversing the given
+input from the 3rd position the resultant
+output will be 3 2 1 4 5.
+*/
+
+/*****************CODE*****************/
+queue<int> modifyQueue(queue<int> q, int k)
+{
+    deque<int>d;
+    for(int i=0;i<k;i++)
+    {
+        d.push_back(q.front());
+        q.pop();
+    }
+    while(!d.empty())
+    {
+        int k=d.back();
+        q.push(k);
+        d.pop_back();
+    }
+    for(int i=0;i<q.size()-k;i++)
+    {
+        q.push(q.front());
+        q.pop();
+    }
+    return q;
+}
