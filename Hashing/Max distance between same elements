@@ -1,0 +1,33 @@
+/**************
+Given an array with repeated elements, the task is to find the maximum distance between two occurrences of an element.
+Example 1:
+Input
+n= 6
+arr = {1, 1, 2, 2, 2, 1}
+Output
+5
+Explanation
+arr[] = {1, 1, 2, 2, 2, 1}
+Max Distance: 5
+Distance for 1 is: 5-0 = 5
+Distance for 2 is : 4-2 = 2
+Max Distance 5
+*/
+
+/***********CODE*************/
+int maxDistance(int arr[], int n)
+    {
+    //Code here
+        unordered_map<int,int>um;
+        int m=INT_MIN;
+        for(int i=0;i<n;i++)
+        {
+            if(um.find(arr[i]) == um.end())
+            {
+                um.insert({arr[i],i});          //um[arr[i]]=i;
+            }
+            int k=um.find(arr[i])->second;     //int k= (i-um[arr[i]]);
+            m= max(m,abs(i-k));                //m=max(m,k);
+        }
+        return m;
+    }
