@@ -1,0 +1,64 @@
+/***************
+Example 1:
+Input:
+       1
+    /   \
+  2      3
+ / \    / \
+4   5  6   7
+
+Output= 4 2 12 3 7
+*/
+
+/**************CODE***************/
+vector <int> verticalSum(Node *root) {
+        // add code here.
+        if(root==NULL)
+            return {};
+        map<int,int>m;
+        queue<pair<Node*,int>>q;
+        q.push({root,0});
+        
+        while(!q.empty())
+        {
+            Node*t=q.front().first;
+            int h=q.front().second;
+            q.pop();
+            m[h]+=t->data;
+            if(t->left)
+                q.push({t->left,h-1});
+            if(t->right)
+                q.push({t->right,h+1});
+        }
+        vector<int>v;
+        for(auto i : m)
+            v.push_back(i.second);
+        return v;
+    }
+    
+    
+    
+    
+    
+    /************CODE-2*******
+     void func(Node*root,int h,map<int,int>&m)
+  {
+      if(root==NULL)
+        return ;
+        
+        m[h]+=root->data;
+        func(root->left,h-1,m);
+        func(root->right,h+1,m);
+  }
+  
+    vector <int> verticalSum(Node *root) {
+        // add code here.
+        map<int,int>m;
+        int h=0;
+        vector<int>v;
+        func(root,h,m);
+        for(auto i : m)
+            v.push_back(i.second);
+        return v;
+        }
+    */
