@@ -1,0 +1,57 @@
+/**********************
+Example 1:
+Input:
+      1
+    /   \
+   3     2
+Output:1 3 2
+
+Example 2:
+Input:
+           10
+         /     \
+        20     30
+      /    \
+    40     60
+Output: 10 20 30 60 40 
+*/
+
+/****************CODE***********/
+vector<int> findSpiral(Node *root)
+{
+    //Your code here
+    vector<int>v;
+    if(!root)
+        return v;
+    queue<Node*>q;
+    q.push(root);
+    int f=1;
+    while(!q.empty())
+    {
+        vector<int>temp;
+        int size=q.size();
+        while(size--)
+        {
+            Node*t=q.front();
+            q.pop();
+            temp.push_back(t->data);
+            if(t->left)
+                q.push(t->left);
+            if(t->right)
+                q.push(t->right);
+        }
+        if(f%2==0)
+        {
+            for(int i : temp)
+                v.push_back(i);
+        }
+        else
+        {
+            reverse(temp.begin(),temp.end());
+            for(int i : temp)
+                v.push_back(i);
+        }
+        f++;
+    }
+    return v;
+}
