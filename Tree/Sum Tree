@@ -1,0 +1,53 @@
+/*********************************
+Example 1:
+Input:
+    3
+  /   \    
+ 1     2
+Output: 1
+Explanation: The sum of left subtree and right subtree
+is 1 + 2 = 3, which is the value of the root node.
+Therefore,the given binary tree is a sum tree.
+
+Example 2:
+Input:
+          10
+        /    \
+      20      30
+    /   \ 
+   10    10
+
+Output: 0
+Explanation: The given tree is not a sum
+tree. For the root node, sum of elements
+in left subtree is 40 and sum of elements
+in right subtree is 30. Root element = 10
+which is not equal to 30+40.
+*/
+
+/*****************CODE*************/
+int sum=1;
+    int solve(Node*root)
+    {
+        if(root==NULL)
+            return 0;
+        int l=solve(root->left);
+        int r=solve(root->right);
+        if(!l and !r)
+            return root->data;
+            
+        if(l+r != root->data)
+            sum=0;
+        return l+r+root->data;  
+            
+    }
+    
+    bool isSumTree(Node* root)
+    {
+         // Your code here
+         if(!root->right and !root->left and root->data==0)
+            return 1;
+         sum=1;
+         solve(root);
+         return sum;
+    }
