@@ -1,0 +1,28 @@
+/*****************CODE-1**********/
+bool func(Node*root, int S, int sum)
+    {
+        if(root==NULL)
+            return 0;
+        if(!root->left and !root->right)
+        {
+            if(sum+root->data==S)
+                return 1;
+            else 
+                return 0;
+        }
+        return func(root->left,S,sum+root->data) or func(root->right,S,sum+root->data);
+    }
+    //public:
+    bool hasPathSum(Node *root, int S) {
+    return func(root,S,0);
+}
+
+/**************CODE-2
+bool hasPathSum(Node *root, int S) {
+    if(root==NULL)
+        return 0;
+    if(root->left==NULL and root->right==NULL)
+        return (S- root->data == 0);
+        
+    return hasPathSum(root->left,S-root->data) or hasPathSum(root->right,S-root->data);
+*/
