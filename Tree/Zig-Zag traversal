@@ -1,0 +1,52 @@
+/*****************
+Example:
+Input:
+           7
+        /     \
+       9       7
+     /  \     /   
+    8    8   6     
+   /  \
+  10   9 
+Output:
+7 7 9 8 8 6 9 10 
+*/
+
+/*************CODE*************/
+vector <int> zigZagTraversal(Node* root)
+{
+    if(root==NULL)
+        return {};
+	queue<Node*>q;
+	q.push(root);
+	vector<int>ans;
+	int f=0;
+	while(!q.empty())
+	{
+	    vector<int>temp;
+	    int k=q.size();
+	    while(k--)
+	    {
+	        Node* t=q.front();
+	        q.pop();
+	        temp.push_back(t->data);
+	        if(t->left) 
+	            q.push(t->left);
+	        if(t->right)
+	            q.push(t->right);
+	    }
+	    if(f%2==0)
+	    {
+	        for(auto i : temp)
+	            ans.push_back(i);
+	    }
+	    else
+	    {
+	        reverse(temp.begin(),temp.end());
+	        for(auto i : temp)
+	            ans.push_back(i);
+	    }
+	    f++;
+	}
+	return ans;
+}
