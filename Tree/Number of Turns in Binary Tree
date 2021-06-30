@@ -1,0 +1,111 @@
+/*******Not grabbed***
+Example 1:
+
+Input :      
+Tree = 
+           1
+        /    \
+       2       3
+     /  \     /  \
+    4    5   6    7                        
+   /        / \                        
+  8        9   10   
+
+first node = 5
+second node = 10
+
+Output: 4
+
+Explanation : 
+Turns will be at 2, 1, 3, 6.
+
+Example 2:
+
+Input :      
+Tree = 
+           1
+        /     \
+       2        3
+     /  \      /  \
+    4    5    6    7                        
+   /         / \                        
+  8         9   10   
+
+first node = 1
+second node = 4  
+
+Output : -1
+
+Explanation: No turn is required since 
+they are in a straight line.
+*/
+
+/***************CODE*******/
+Node* lca(Node* node,int f,int s){
+    if(node==NULL)
+        return NULL;
+    if(node->data==f)
+        return node;
+    if(node->data==s)
+        return node;
+    Node* l=lca(node->left,f,s);
+    Node* r=lca(node->right,f,s);
+    if(l && r)
+        return node;
+    if(l==NULL)
+        return r;
+    else
+        return l;
+}
+
+void check(Node* node,unordered_map<Node*,Node*>&mp){
+    if(node==NULL)
+        return;
+    if(node->left){
+        mp[node->left]=node;
+        check(node->left,mp);
+    }
+    if(node->right){
+        mp[node->right]=node;
+        check(node->right,mp);
+    }
+}
+
+int NumberOFTurns(struct Node* root, int first, int second){
+    Node* a=lca(root,first,second);
+    vector<int>f,s;
+    unordered_map<Node*,Node*>mp;
+    check(root,mp);
+    Node*fnode=lca(root,first,first);
+    Node*snode=lca(root,second,second);
+    // Node*la=a;
+    // Node*ra=a;
+    while(fnode!=a){
+        Node* p=mp[fnode];
+        if(p->left==fnode)
+            f.push_back(0);
+        else
+            f.push_back(1);
+        fnode=p;
+    }
+    while(snode!=a){
+        Node* p=mp[snode];
+        if(p->left==snode)
+            s.push_back(0);
+        else
+            s.push_back(1);
+        snode=p;
+    }
+    int cnt=0;
+    for(int i=1;i<f.size();i++){
+        if(f[i]!=f[i-1])
+            ++cnt;
+    }
+    for(int i=1;i<s.size();i++){
+        if(s[i]!=s[i-1])
+            ++cnt;
+    }
+    if(f.size()>0 && s.size()>0)
+        ++cnt;
+    return cnt;
+}
