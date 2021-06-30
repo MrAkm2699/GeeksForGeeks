@@ -1,0 +1,63 @@
+/******
+Example 1 :
+Input : 
+               1
+             /   \ 
+           2       3
+         /   \       \    
+        4     5       2     
+                     /  \    
+                    4    5
+Output : 1
+Explanation : 
+    2     
+  /   \    
+ 4     5
+is the duplicate sub-tree.
+
+Example 2 :
+Input : 
+               1
+             /   \ 
+           2       3
+
+Output: 0
+*/
+
+/**********CODE*************/
+string solve(Node*root, unordered_map<string,int>&m )
+{
+    string s;
+    if(!root)
+        {
+            s+="$";
+            return s;
+        }
+    //if below case is added then no need to confirm i.first.length()>3
+    if(!root->right and !root->left)
+        {
+            s+=root->data;
+            return s;
+        }
+        
+    s+=root->data;
+    s+=solve(root->left,m);
+    s+=solve(root->right,m);
+    m[s]++;
+    return s;
+}
+bool dupSub(Node *root)
+{
+     //your code here
+     unordered_map<string,int>m;
+     if(!root)
+        return false;
+    solve(root,m);
+    
+    for(auto i: m) 
+    {
+        if(i.second>=2)// and i.first.length()>3)
+            return true;
+    }
+    return false;
+}
