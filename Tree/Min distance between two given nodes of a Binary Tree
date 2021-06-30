@@ -1,0 +1,48 @@
+/**************
+Example 1:
+Input:
+        1
+      /  \
+     2    3
+a = 2, b = 3
+Output: 2
+*/
+
+/**************CODE**********/
+struct Node* LCA(Node*root,int a,int b)
+   {
+        if(!root)
+            return NULL;
+        if(root->data==a or root->data==b)
+            return root;
+        Node* l=LCA(root->left,a,b);
+        Node* r=LCA(root->right,a,b);
+        if(l and r) 
+            return root;
+        if(l)
+            return l;
+        else
+            return r;
+   }
+   
+   int solve(Node*root, int val)
+   {
+       if(!root)
+            return 0;
+        if(root->data==val)
+            return 1;
+        int a=solve(root->left,val);
+        int b=solve(root->right,val);
+        if(!a and !b)
+            return 0;
+        return a+b+1;
+   }
+   
+int findDist(Node* root, int a, int b) {
+    // Your code here
+    Node*anc=LCA(root,a,b);
+    int x=solve(anc,a);
+    int y=solve(anc,b);
+    return x+y-2;
+}
+
