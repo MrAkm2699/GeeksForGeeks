@@ -1,0 +1,43 @@
+/***************
+Example 1:
+Input:
+     10
+    /
+  10 
+Output: 1
+Explanation: Here, every node is sum of
+its left and right child.
+Example 2:
+Input:
+       1
+     /   \
+    4     3
+   /  \
+  5    N
+Output: 0
+*/
+
+/**********CODE*********/
+int isSumProperty(Node *root)
+{
+    if(root==NULL)
+        return 1;
+    if(!root->left and !root->right)
+        return 1;
+    int sum=0;    
+        
+    if(!root->left and root->right)
+        sum+= root->right->data;
+    else 
+    if(!root->right and root->left)
+        sum+= root->left->data;
+    else
+    if(root->left and root->right)
+        sum+=root->right->data + root->left->data;
+        
+    if(sum != root->data)
+        return 0;
+    
+    return isSumProperty(root->left) and isSumProperty(root->right);
+    
+}
