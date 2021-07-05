@@ -1,0 +1,45 @@
+/**********
+Example 1:
+
+Input:
+6
+1 7 5 50 40 10
+
+Output:
+1 5 7 10 40 50
+
+Explanation:
+Testcase 1: The BST for the given post order traversal is:
+          10
+         /  \
+        5    40
+       /  \     \
+      1    7     50
+
+Thus the inorder traversal of BST is: 1 5 7 10 40 50.
+*/
+
+/***********CODE*************/
+Node* BST(struct Node*root,int val)
+{
+    if(root==NULL)
+        root=new Node(val);
+    else if(root->data > val)
+        root->left=BST(root->left,val);
+    else if(root->right,val)
+        root->right=BST(root->right,val);
+    return root;
+}
+
+Node *constructTree (int post[], int size)
+{
+//code here
+    if(size==0)
+        return NULL;
+    Node*root=NULL;
+    for(int i=0;i<size;i++)
+    {
+        root=BST(root,post[i]);
+    }
+    return root;
+}
