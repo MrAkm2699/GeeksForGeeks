@@ -1,0 +1,12 @@
+/**********CODE************/
+int minValue(Node* root)
+{
+    // Code here
+    while(root->left!=NULL)
+        {
+            if(root->left)
+                root=root->left;
+        }
+    int ans=root->data;
+    return ans;
+}
