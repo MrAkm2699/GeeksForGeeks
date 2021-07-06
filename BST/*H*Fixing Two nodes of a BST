@@ -1,0 +1,55 @@
+/**********
+ Example 1:
+Input:
+       10
+     /    \
+    5      8
+   / \
+  2   20
+Output: 1
+
+Example 2:
+
+Input:
+         11
+       /    \
+      3      17
+       \    /
+        4  10
+Output: 1 
+Explanation: 
+By swapping nodes 11 and 10, the BST 
+can be fixed.
+*/
+
+/***********CODE**********/
+void inOrder(Node *root, Node *&prev, Node *&first, Node *&second)
+{
+    if(root == NULL)
+        return;
+    
+    
+    inOrder(root->left, prev, first, second);
+    if(prev != NULL && root->data < prev->data)
+    {
+        if(first == NULL)
+        {
+            first = prev;
+        }
+        second = root;
+    }
+    prev = root;
+    inOrder(root->right, prev, first, second);
+
+}
+
+Node *correctBST(Node *root)
+{
+    Node *prev = NULL, *first = NULL, *second = NULL;
+    
+    inOrder(root, prev, first, second);
+    
+    swap(first->data, second->data);
+    
+    return root;
+}
