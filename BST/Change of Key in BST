@@ -1,0 +1,104 @@
+/****************
+Example 1:
+Input: Root of below tree
+              50
+           /     \
+          30      70
+         /  \    /  \
+       20   40  60   80 
+       
+     Old key value:  40
+     New key value:  10
+Output: BST should be modified to following
+              50
+           /     \
+          30      70
+         /       /  \
+       20      60   80  
+       /
+     10
+*/
+
+/*******CODE****first delete***then insert*******/
+node* leftest_node(node*root)
+{
+        while(root->left)
+            root=root->left;
+        
+            return root;
+        }
+        node *delete_node(node*root,int x)
+        {
+            if(root==NULL)
+            return NULL;
+            
+            if(root->key>x)
+            root->left = delete_node(root->left,x);
+            else if(root->key<x) root->right = delete_node(root->right,x);
+            
+            else
+            {
+            
+            if(root->key==x && !root->left && !root->right)
+            {
+            delete root;
+            root= NULL;
+            }
+            
+            else if(root->key==x && !root->left && root->right)
+            {
+            node *temp = root;
+            delete temp;
+            root = root->right;
+            }
+            else if(root->key==x && root->left && !root->right)
+            {
+            node *temp = root;
+            delete temp;
+            root= root->left;
+            }
+            else
+            {
+            node *temp = leftest_node(root->right);
+            root->key = temp->key;
+            root->right=delete_node(root->right,temp->key);
+            
+            }
+            
+            }
+            return root;
+        }
+        void insert(node*root,int x)
+        {
+        if(root==NULL)
+        return;
+        
+        if(root->key>x && !root->left)
+        {
+        node *newnode= new node(x);
+        root->left = newnode;
+        }
+        
+        else if(root->key>x && root->left)
+        insert(root->left,x);
+        
+        else if(root->key <x && root->right)
+        insert(root->right,x);
+        
+        else
+        {
+        node *newnode= new node(x);
+        root->right = newnode;
+        }
+        }
+        struct node *changeKey(struct node *root, int oldVal, int newVal)
+        {
+        // Code here
+        if(root==NULL)
+        return NULL;
+        
+        root = delete_node(root,oldVal);
+        insert(root,newVal);
+        
+        return root;
+}
