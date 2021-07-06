@@ -1,0 +1,50 @@
+/**********
+Example 1:
+Input:
+      5
+    /   \
+   1     7
+    \
+     2 
+      \
+       3
+X = 3
+Output: 3
+Explanation: We find 3 in BST, so ceil
+of 3 is 3.
+Example 2:
+Input:
+     10
+    /  \
+   5    11
+  / \ 
+ 4   7
+      \
+       8
+X = 6
+Output: 7
+Explanation: We find 7 in BST, so ceil
+of 6 is 7.
+*/
+
+/************CODE***********/
+int solve (Node*root,int input,int &ans)
+{
+    if(root)
+    {
+        solve(root->left,input,ans);
+        if(root->data>=input)
+        {
+            ans=min(ans,root->data);
+        }
+        solve(root->right,input,ans);
+    }
+}
+int findCeil(Node* root, int input) 
+{ 
+    if (root == NULL) 
+        return -1; 
+    int ans=INT_MAX;
+    solve(root,input,ans);
+    return ans;
+} 
