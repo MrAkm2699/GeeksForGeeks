@@ -1,0 +1,37 @@
+/******
+To decode the encoded data we require the Huffman tree. We iterate through the binary encoded data. To find character corresponding to current bits, we use following simple
+steps.
+We start from root and do following until a leaf is found.
+If current bit is 0, we move to left node of the tree.
+If the bit is 1, we move to right node of the tree.
+If during traversal, we encounter a leaf node, we print character of that particular leaf node and then again continue the iteration of the encoded data starting from step 1.
+
+Example 1:
+Input : abc
+Output : abc
+
+Example 2: 
+Input : geeksforgeeks
+Output : geeksforgeeks
+*/
+
+/***********CODE************/
+string decode_file(struct MinHeapNode* root, string s)
+{
+    string ans="";
+    MinHeapNode*curr=root;
+    for(int i=0;i<s.size();i++)
+    {
+        if(s[i]=='0')
+            curr=curr->left;
+        else
+            curr=curr->right;                    // for s[i]=='1'
+        if(!curr->right and !curr->left)
+        {
+            ans+=curr->data;
+            curr=root;
+        }
+    }
+    return ans;
+//add code here.
+}
