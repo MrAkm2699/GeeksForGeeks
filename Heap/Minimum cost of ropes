@@ -1,0 +1,35 @@
+/********
+Example 2:
+Input:
+n = 5
+arr[] = {4, 2, 7, 6, 9}
+Output: 
+62 
+Explanation:
+First, connect ropes 4 and 2, which makes
+the array {6,7,6,9}. Next, add ropes 6 and
+6, which results in {12,7,9}. Then, add 7
+and 9, which makes the array {12,16}. And
+finally add these two which gives {28}.
+Hence, the total cost is 6 + 12 + 16 + 
+28 = 62.
+*/
+
+
+/************CODE**********/
+long long minCost(long long arr[], long long n) {
+        // Your code here
+        priority_queue<long long,vector<long long>,greater<long long> >q(arr,arr+n);
+        
+       long long sum=0;
+        while(q.size()>1)
+        {
+            long long a=q.top();
+            q.pop();
+            long long b=q.top();
+            q.pop();
+            q.push(a+b);
+            sum+= a+b;
+        }
+        return sum;
+    }
