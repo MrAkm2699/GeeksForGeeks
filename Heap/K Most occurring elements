@@ -1,0 +1,46 @@
+/*********
+Example 1:
+
+Input:
+N = 8
+arr[] = {3,1,4,4,5,2,6,1}
+K = 2
+Output: 4
+Explanation: Since, 4 and 1 are 2 most
+occurring elements in the array with
+their frequencies as 2, 2. So total
+frequency is 2 + 2 = 4.
+Example 2:
+
+Input:
+N = 8
+arr[] = {3,3,3,4,1,1,6,1}
+K = 2
+Output: 6
+*/
+
+
+/*********CODE***********/
+int kMostFrequent(int arr[], int n, int k) 
+    { 
+    	// Your code here
+    	int ans=0;
+    	unordered_map<int,int>m;
+    	priority_queue<int>q;
+    	
+    	for(int i=0;i<n;i++)
+    	    m[arr[i]]++;
+    	 
+    	for(auto i=m.begin();i!=m.end();i++)
+    	{
+    	    q.push(i->second);
+    	}
+    	
+    	while(k--)
+    	{
+    	    ans+=q.top();
+    	    q.pop();
+    	}
+    	return ans;
+    	
+    } 
