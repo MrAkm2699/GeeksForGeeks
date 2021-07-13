@@ -1,0 +1,70 @@
+/*************
+Example 1:
+Input:
+
+N = 4
+X[] = 5,15,1,3
+Output:
+5
+10
+5
+4
+Explanation:Flow in stream : 5, 15, 1, 3 
+5 goes to stream --> median 5 (5) 
+15 goes to stream --> median 10 (5,15) 
+1 goes to stream --> median 5 (5,15,1) 
+3 goes to stream --> median 4 (5,15,1 3) 
+*/
+
+/************CODE************/
+ priority_queue<int>maxq;
+    priority_queue<int,vector<int>,greater<int> >minq;
+    // int ans=0;
+    void insertHeap(int &x)
+    {
+        if(maxq.empty() == true)
+        {
+            maxq.push(x);
+            return;
+        }
+        if(maxq.size() > minq.size())
+        {
+            if(maxq.top() > x)
+            {
+                minq.push(maxq.top());
+                maxq.pop();
+                maxq.push(x);
+            }
+            else
+            {
+                minq.push(x);
+            }
+        }
+        else{
+            
+            if(x < maxq.top())
+                maxq.push(x);
+            else
+            {
+                minq.push(x);
+                maxq.push(minq.top());
+                minq.pop();
+            }
+        }
+            
+    }
+    
+    //Function to balance heaps.
+    void balanceHeaps()
+    {
+        
+    }
+    
+    //Function to return Median.
+    double getMedian()
+    {
+        if(maxq.size() > minq.size())
+            return maxq.top();
+        else
+            return (maxq.top() + minq.top())/2;
+    }
