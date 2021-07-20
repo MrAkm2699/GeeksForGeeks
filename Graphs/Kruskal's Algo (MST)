@@ -1,0 +1,37 @@
+/**************
+ALGO:
+1. Sort all the edges in non-decreasing order of their weight. 
+2. Pick the smallest edge. Check if it forms a cycle with the spanning tree formed so far. If cycle is not formed, include this edge. Else, discard it. 
+3. Repeat step#2 until there are (V-1) edges in the spanning tree.
+***************/
+
+/**********CODE*************/
+
+int Graph::find_set(int i) {
+  // If i is the parent of itself
+  if (i == parent[i])
+    return i;
+  else
+    // Else if i is not the parent of itself
+    // Then i is not the representative of his set,
+    // so we recursively call Find on its parent
+    return find_set(parent[i]);
+}
+
+void Graph::union_set(int u, int v) {
+  parent[u] = parent[v];
+}
+
+
+void Graph::kruskal() {
+  int i, uRep, vRep;
+  sort(G.begin(), G.end());  // increasing weight
+  for (i = 0; i < G.size(); i++) {
+    uRep = find_set(G[i].second.first);                           //G contains                  g{weight, edge(u,v) }
+    vRep = find_set(G[i].second.second);                          //we could do much better     g{w,u,v}              then could have used find_set(i[1])
+    if (uRep != vRep) {
+      T.push_back(G[i]);  // add to tree                          //Cost would be simple add weight of edge which is added in tree
+      union_set(uRep, vRep);
+    }
+  }
+}
