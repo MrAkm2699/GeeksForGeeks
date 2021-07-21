@@ -1,0 +1,29 @@
+/***********CODE***********/
+	vector<int>bfsOfGraph(int V, vector<int> adj[])
+	{
+	    // Code here
+	    vector<int>ans;
+      
+	    queue<int>q;
+      
+	    bool vis[V]={};
+	    vis[0]=true;
+      
+	    q.push(0);
+	    
+	    while(!q.empty())
+	    {
+	        int k= q.front();
+	        q.pop();
+	        ans.push_back(k);
+	        for(auto i : adj[k])
+	        {
+	            if(!vis[i])
+	            {
+	                vis[i]=true;
+	                q.push(i);
+	            }
+	        }
+	    }
+	    return ans;
+	}
