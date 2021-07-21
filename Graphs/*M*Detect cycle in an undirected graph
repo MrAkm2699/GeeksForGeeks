@@ -1,0 +1,29 @@
+/*******CODE********/
+ bool cyclic(int i,vector<bool> &vis,vector<int>adj[],int parent)
+	{
+	    vis[i]=true;
+	    for(auto x : adj[i])
+	    {
+	        if(!vis[x])
+	        {
+	           if(cyclic(x,vis,adj,i))
+	                 return true;
+	        }
+	       else if(x!=parent)
+	        return true;
+	    }
+	    return false;
+	}
+	
+	bool isCycle(int V, vector<int> adj[]) 
+	{
+	   	// code here
+	   	vector<bool>vis(V,false);
+	   //	vector<bool>order(V,0);
+	   	for(int i=0;i<V;i++)
+	   	{
+	   	    if(!vis[i] and cyclic(i,vis,adj,-1))
+	   	        return true;
+	   	}
+	   	return false;
+	}
