@@ -1,0 +1,103 @@
+/********
+Example 1:
+Input: grid = {{0,1,2},{0,1,2},{2,1,1}}
+Output: 1
+Explanation: The grid is-
+0 1 2
+0 1 2
+2 1 1
+Oranges at positions (0,2), (1,2), (2,0)
+will rot oranges at (0,1), (1,1), (2,2) and 
+(2,1) in unit time.
+*/
+
+/*************CODE************/
+ bool isSafe(vector<vector<int>> &grid, int r, int c, int i, int j)
+        {
+            return (i >= 0 && i < r && j >= 0 && j < c && grid[i][j] == 1);
+        }
+    int orangesRotting(vector<vector<int>>& grid) {
+        // Code here
+        int ans=-1;
+        int r=grid.size();
+        int c=grid[0].size();
+        queue<pair<int,int>>q;
+        
+        for(int i=0;i<r;i++)
+        {
+            for(int j=0;j<c;j++)
+            {
+                if(grid[i][j]==2)
+                {
+                    q.push({i,j});
+                    grid[i][j]=3;       //grid[i][j]=0;
+                }
+            }
+        }
+        
+        while(!q.empty())
+        {
+            int count = q.size();
+        
+        for(int k = 0; k < count; k++)
+        {
+            auto index=q.front();
+            int i=index.first;
+            int j=index.second;
+            
+            if(isSafe(grid, r, c, i, j+1))
+            {
+                q.push({i, j+1});
+                grid[i][j+1] = 3;
+            }
+            
+            if(isSafe(grid, r, c, i+1, j))
+            {
+                q.push({i+1, j});
+                grid[i+1][j] = 3;
+            }
+            
+            if(isSafe(grid, r, c, i,j-1))
+            {
+                q.push({i, j-1});
+                grid[i][j-1] = 3;
+            }
+            
+            if(isSafe(grid, r, c, i-1, j))
+            {
+                q.push({i-1, j});
+                grid[i-1][j] = 3;
+            }
+            q.pop();
+        }
+        
+        ans++;
+        }
+  /************************
+            
+            OR
+            q.pop() ;
+            const int dx[] = {-1, 0, 1, 0, -1};
+                for(int k = 0; k < 4; ++k)
+                {
+                    int x = i + dx[k], y = j + dy[k] ;
+                    if(x < 0 || y < 0 || x >= n || y >= m || !grid[x][y]) continue ;
+                
+                    grid[x][y] = 0 ;
+                    q.push({x, y}) ;
+                }
+                }
+                ++ans ;
+   ****************/
+        
+        for(int i = 0; i < r; i++)
+        {
+            for(int j = 0; j < c; j++)
+            {
+                if(grid[i][j] == 1)
+                    return -1;
+            }
+        }
+        
+        return ans;
+    }
