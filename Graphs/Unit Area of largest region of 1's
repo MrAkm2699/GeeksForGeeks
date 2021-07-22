@@ -1,0 +1,53 @@
+/***********
+Example 1:
+Input: grid = {{1,1,1,0},{0,0,1,0},{0,0,0,1}}
+Output: 5
+Explanation: The grid is-
+1 1 1 0
+0 0 1 0
+0 0 0 1
+The largest region of 1's is colored
+in orange.
+Example 2:
+Input: grid = {{0,1}}
+Output: 1
+*/
+
+/****************CODE************/
+void DFS(int i,int j,vector<vector<int>>&grid,int &var,int r,int c)
+    {
+        if(i>=0 and j>=0 and i<r and j<c and grid[i][j]==1)
+        {
+            grid[i][j]=2;
+            var++;
+            DFS(i-1,j-1,grid,var,r,c);
+            DFS(i-1,j,grid,var,r,c);
+            DFS(i-1,j+1,grid,var,r,c);
+            DFS(i,j-1,grid,var,r,c);
+            DFS(i,j+1,grid,var,r,c);
+            DFS(i+1,j-1,grid,var,r,c);
+            DFS(i+1,j,grid,var,r,c);
+            DFS(i+1,j+1,grid,var,r,c);
+        }
+    }
+    int findMaxArea(vector<vector<int>>& grid) {
+        // Code here
+        int ans=0;
+        // int var=0;
+        int r=grid.size();
+        int c=grid[0].size();
+        
+        for(int i=0;i<r;i++)
+        {
+            for(int j=0;j<c;j++)
+            {
+                if(grid[i][j]==1)
+                    {
+                        int var=0;
+                        DFS(i,j,grid,var,r,c);
+                        ans=max(ans,var);
+                    }
+            }
+        }
+        return ans;
+    }
