@@ -1,0 +1,36 @@
+/******
+if returned array is topological sorted then answer is 1
+*/
+
+/**************CODE**********/
+	void solve(int src,bool vis[],vector<int>adj[],stack<int>&s)
+	{
+	    vis[src]=true;
+	    for(auto x :adj[src])
+	    {
+	        if(!vis[x])
+	            solve(x,vis,adj,s);
+	    }
+	    s.push(src);
+	}
+	
+	vector<int> topoSort(int V, vector<int> adj[]) 
+	{
+	    // code here
+	    stack<int>s;
+	    bool vis[V]={};
+	    vector<int>ans;
+	    for(int i=0;i<V;i++)
+	    {
+	        if(!vis[i])
+	            solve(i,vis,adj,s);
+	    }
+	    
+	    while(!s.empty())
+	    {
+	        int k=s.top();
+	        s.pop();
+	        ans.push_back(k);
+	    }
+	    return ans;
+	}
