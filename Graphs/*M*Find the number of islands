@@ -1,0 +1,72 @@
+/******
+Example 1:
+
+Input:
+grid = {{0,1},{1,0},{1,1},{1,0}}
+Output:
+1
+Explanation:
+The grid is-
+0 1
+1 0
+1 1
+1 0
+All lands are connected.
+Example 2:
+
+Input:
+grid = {{0,1,1,1,0,0,0},{0,0,1,1,0,1,0}}
+Output:
+2
+Expanation:
+The grid is-
+0 1 1 1 0 0 0
+0 0 1 1 0 1 0 
+There are two islands one is colored in blue 
+and other in orange.
+**/
+
+
+
+
+
+/************CODE*********/
+ void DFS(int i,int j,vector<vector<char> > &grid,int r,int c)
+    {
+        if(i>=0 and j>=0 and i<r and j<c and grid[i][j]=='1')               //if(!vis[i][j])
+        {   
+            grid[i][j]='2';                                                 //vis[i][j]=true;
+            
+            DFS(i-1,j-1,grid,r,c);
+            DFS(i-1,j,grid,r,c);
+            DFS(i-1,j+1,grid,r,c);
+            DFS(i,j-1,grid,r,c);
+            DFS(i,j+1,grid,r,c);
+            DFS(i+1,j-1,grid,r,c);
+            DFS(i+1,j,grid,r,c);
+            DFS(i+1,j+1,grid,r,c);    
+        }
+        
+    }
+    int numIslands(vector<vector<char>>& grid) 
+    {
+        // Code here
+        int ans=0;
+        int r=grid.size();
+        int c=grid[0].size();
+                                            //bool vis[r][c];
+                                            // memset(vis,0,sizeof(vis));
+        
+        for(int i=0;i<r;i++)
+        {
+            for(int j=0;j<c;j++)
+            {
+                if(grid[i][j]=='1')           // and !vis[i][j])
+                {
+                    DFS(i,j,grid,r,c);
+                    ans++;
+                }
+            }
+        }
+        return ans;
+    }
