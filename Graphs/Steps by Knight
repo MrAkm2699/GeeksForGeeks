@@ -1,0 +1,145 @@
+/**********CODe*************/
+int vis[1001][1001];
+    bool isValid(int x, int y,int n)
+{
+if (x < 1 || x > n || y < 1 || y > n)
+return false;
+
+if (vis[x][y] == 1)
+return false;
+
+return true;
+}
+
+int minStepToReachTarget(vector<int>&KnightPos, vector<int>&TargetPos, int N){
+
+int srcX= KnightPos[0], srcY= KnightPos[1];
+int tX= TargetPos[0], tY= TargetPos[1];
+
+int dx[] = {-2, -1, 1, 2, 2, 1, -1, -2};
+int dy[] = {1, 2, 2, 1, -1, -2, -2, -1};
+int dist[N+1][N+1];
+memset(vis,0,sizeof(vis));
+memset(dist,0,sizeof(dist));
+
+queue<pair<int, int>> q;
+q.push({srcX, srcY});
+vis[srcX][srcY] = 1;
+dist[srcX][srcY] = 0;
+
+if (srcX == tX && srcY == tY)
+return dist[srcX][srcY];
+
+while (!q.empty())
+{
+int currX = q.front().first;
+int currY = q.front().second;
+q.pop();
+for (int i = 0; i < 8; i++)
+{
+if (isValid(currX + dx[i], currY + dy[i],N))
+{
+int newX = currX + dx[i];
+int newY = currY + dy[i];
+
+dist[newX][newY] = dist[currX][currY] + 1;
+vis[newX][newY] = 1;
+q.push({newX, newY});
+
+if (newX == tX && newY == tY)
+return dist[newX][newY];
+}
+}
+
+}
+}
+
+
+/*******************DIDNT WORK logic correct********
+
+int minStepToReachTarget(vector<int>&KnightPos,vector<int>&TargetPos,int N)
+	{
+	    // Code here
+	    int x1=KnightPos[0];
+	    int y1=KnightPos[1];
+	    int x2=TargetPos[0];
+	    int y2=TargetPos[1];
+	    
+	   // vector<int> xpos = {2, 2, -2, -2, 1, 1, -1, -1};
+    //     vector<int> ypos = {1, -1, 1, -1, 2, -2, 2, -2};
+        
+	    int t[1001][1001];
+	    for(int i=0;i<N;i++)
+	    {
+	        for(int j=0;j<N;j++)
+	            t[i][j]=0;
+	    }
+	    queue<pair<int,int>> q;
+	    
+	    if(x1==x2 and y1==y2)
+	        return 0;
+	        
+	    q.push(make_pair(x1-1,y2-1));
+	    while(!q.empty())
+	    {
+	        auto curr=q.front();
+	        int i=curr.first;
+	        int j=curr.second;
+	        q.pop();
+	        
+	        if( i+1>=0 and j+2<N and i+1<N and j+2>=0 and t[i+1][j+2]==0 )
+    	        {
+    	            t[i+1][j+2]=t[i][j]+1;
+    	            q.push(make_pair(i+1,j+2));
+    	        }   
+	        if( i+2>=0 and j+1<N and i+2<N and j+1>=0 and t[i+2][j+1]==0 )
+    	        {
+    	            t[i+2][j+1]=t[i][j]+1;
+    	            q.push(make_pair(i+2,j+1));
+    	        } 
+    	   if( i+2>=0 and j-1<N and i+2<N and j-1>=0 and t[i+2][j-1]==0 )
+    	        {
+    	            t[i+2][j-1]=t[i][j]+1;
+    	            q.push(make_pair(i+2,j-1));
+    	        } 
+    	   if( i-2>=0 and j+1<N and i-2<N and j+1>=0 and t[i-2][j+1]==0 )
+    	        {
+    	            t[i-2][j+1]=t[i][j]+1;
+    	            q.push(make_pair(i-2,j+1));
+    	        } 
+    	   if( i+1>=0 and j-2<N and i+1<N and j-2>=0 and t[i+1][j-2]==0 )
+    	        {
+    	            t[i+1][j-2]=t[i][j]+1;
+    	            q.push(make_pair(i+1,j-2));
+    	        } 
+    	   if( i-1>=0 and j+2<N and i-1<N and j+2>=0 and t[i-1][j+2]==0 )
+    	        {
+    	            t[i-1][j+2]=t[i][j]+1;
+    	            q.push(make_pair(i-1,j+2));
+    	        } 
+    	   if( i-1>=0 and j-2<N and i-1<N and j-2>=0 and t[i-1][j-2]==0 )
+    	        {
+    	            t[i-1][j-2]=t[i][j]+1;
+    	            q.push(make_pair(i-1,j-2));
+    	        } 
+    	   if( i-2>=0 and j-1<N and i-2<N and j-1>=0 and t[i-2][j-1]==0 )
+    	        {
+    	            t[i-2][j-1]=t[i][j]+1;
+    	            q.push(make_pair(i-2,j-1));
+    	        } 
+	       // for(int k=0;k<8;k++)
+	       // {
+	           // int x = i + xpos[i]; 
+	           // int y = j + ypos[i];
+	           // if( x>=0 and y<N and x<N and y>=0 and t[x][y]==0 )
+    	       // {
+    	       //     t[x][y]=t[i][j]+1;
+    	       //     q.push(make_pair(x,y));
+    	       // }       
+    	       
+    	       
+	        }
+	    return t[x2-1][y2-1];
+	    }
+
+***********************************/
