@@ -8,6 +8,42 @@ minimum distance from the source.
 
 /********CODE*********/
 
+
+vector <int> dijkstra(int V, vector<vector<int>> adj[], int S)
+    {
+        // Code here
+        vector<int>dist(V,INT_MAX);
+        dist[S]=0;
+        
+        priority_queue<pair<int,int>, vector<pair<int,int>>, greater<pair<int,int>>>q;
+        q.push({0,S});
+        
+        while(!q.empty())
+        {
+            int u=q.top().second;                           //HERE UNDERSTANDING TYPE OF ADJ WAS HARD
+            q.pop();
+            
+            for(auto v : adj[u])
+            {
+                // vis[u]=true;
+                int weight=v[1];
+                
+                if(dist[v[0]] > (dist[u] + weight))
+                {
+                    dist[v[0]] = dist[u] + weight ;
+                    q.push({dist[v[0]],v[0]});
+                }
+            }
+        }
+        return dist;
+    }
+
+
+
+
+
+
+/*******************GFG explained code***************
 // Program to find Dijkstra's shortest path using 
 // min heap in STL 
 
@@ -96,3 +132,4 @@ int main()
   
     return 0; 
 } 
+*/
