@@ -1,0 +1,43 @@
+/*****
+Example 1:
+Input:
+N = 3, W = 50
+values[] = {60,100,120}
+weight[] = {10,20,30}
+Output:
+240.00
+Explanation:Total maximum value of item
+we can have is 240.00 from the given
+capacity of sack. 
+*/
+
+/*******CODE******/
+static bool compare(Item a, Item b)
+{
+    double i=(double) a.value/a.weight;
+    double j=(double) b.value/b.weight;
+    return i>j;
+}
+    //Function to get the maximum total value in the knapsack.
+    double fractionalKnapsack(int W, Item arr[], int n)
+    {
+        // Your code here
+        sort(arr,arr+n,compare);
+        double ans=0;
+        double w=0;
+        for(int i=0;i<n;i++)
+        {
+            
+            if(w+arr[i].weight <= W)
+            {
+                w+=arr[i].weight;
+                ans+=arr[i].value;
+            }
+            else{
+                int rem=W-w;
+                ans+= (double) (arr[i].value*rem)/arr[i].weight;
+                break;
+            }
+        }
+        return ans;
+    } 
