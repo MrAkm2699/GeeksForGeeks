@@ -1,0 +1,16 @@
+/****CODE*******/
+ char nonrepeatingCharacter(string S)
+    {
+       //Your code here
+       unordered_map<char,int>m;
+       int n=S.length();
+       for(int i=0; i<n; i++)
+            m[S[i]]++;
+            
+        for(int i=0; i<n; i++)    
+           {
+               if(m[S[i]]==1)
+                    return S[i];
+           } 
+       return '$';
+    }
