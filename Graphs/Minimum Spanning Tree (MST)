@@ -1,0 +1,30 @@
+/************CODE**********/
+int spanningTree(int V, vector<vector<int>> adj[])
+    {
+        // code here
+       priority_queue< pair<int,int>, vector<pair<int,int>>, greater<pair<int,int>>>q;
+       q.push({0,0});
+       int sum=0;
+       vector<bool>vis(V,false);
+       pair<int,int>p;
+       
+       while(!q.empty())
+       {
+                p=q.top();
+                q.pop();
+                
+                if(vis[p.second])    //IMP otherwise sums all weight
+                    continue;
+                
+            sum+=p.first;
+            vis[p.second]=true;
+            
+            int x=p.second;
+            for(int i=0; i<adj[x].size();i++)
+            {
+                if(!vis[adj[x][i][0]])
+                    q.push({adj[x][i][1],adj[x][i][0]});
+            }
+       }
+       return sum;
+    }
