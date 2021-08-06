@@ -1,0 +1,117 @@
+/************
+Example 1:
+Input:
+S = "timetopractice"
+P = "toc"
+Output: 
+toprac
+Explanation: "toprac" is the smallest
+substring in which "toc" can be found.
+
+Example 2:
+Input:
+S = "zoomlazapzo"
+P = "oza"
+Output: 
+apzo
+Explanation: "apzo" is the smallest 
+substring in which "oza" can be found.
+**************/
+
+/**************CODE***********/
+string smallestWindow (string s, string p)
+    {
+        // Your code here
+        string res ="";
+        unordered_map <char ,int> mp;
+        int l = 0 , counter = 0 , len = INT_MAX;
+        
+        for ( char c: p)
+            ++mp[c];
+            
+        for ( int r = 0 ; r < s.size(); ++r)
+        {
+            if (--mp[s[r]] >= 0 ) 
+                ++counter;// moving window
+            
+            while (counter == p.size())
+            { // desire substring
+                if (len > r - l + 1 ) 
+                {
+                    len = r - l + 1;
+                    res = s.substr(l, len);
+                }
+                    if (++mp[s[l]]> 0 ) 
+                        --counter;// shrinking of window
+                ++l;
+            }
+        }
+        
+        return res == "" ? "-1" : res;
+    }
+    
+    
+    ////////////////////OR simplified////////////////
+    /*
+    string smallestWindow (string s, string p)
+    {
+        int hash[256] = {0};
+        int uniqueWords = 0;
+        
+        for(int i = 0; i < p.size(); i++)
+        {
+            if(hash[p[i]] == 0)
+            {
+                uniqueWords++;
+            }
+            
+            hash[p[i]]++;
+        }
+        
+        int resCount = INT_MAX;
+        int resStart = 0;
+        
+        int i = 0, j = 0;
+        
+        while(j < s.size())
+        {
+            hash[s[j]]--;
+            
+            if(hash[s[j]] == 0)
+            {
+                uniqueWords--;
+            }
+            
+            if(uniqueWords == 0)
+            {
+                while(uniqueWords == 0)
+                {
+                    if(resCount > j - i + 1)
+                    {
+                        resCount = min(resCount, j - i + 1);
+                        
+                        resStart = i;
+                    }
+                    
+                    hash[s[i]]++;
+                    
+                    if(hash[s[i]] > 0)
+                    {
+                        uniqueWords++;
+                    }
+                    
+                    i++;
+                }
+            }
+            
+            j++;
+        }
+        
+        
+        if(resCount == INT_MAX)
+        {
+            return "-1";
+        }
+        return s.substr(resStart, resCount);
+    }
+    */
