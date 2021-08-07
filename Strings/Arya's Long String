@@ -1,0 +1,43 @@
+/************
+Example
+Input : 
+s = "ABA"
+k = 3
+n = 7
+c = 'B'
+Output : 
+2
+Explaination : 
+Final string - ABAABAABA
+
+Example 
+Input : 
+s = "MMM"
+k = 2
+n = 4
+c = 'M'
+Output :
+4
+Explaination : 
+Final string - MMMMMM
+*************/
+
+/*****************CODE************/
+int fun(string s, int k, int n, char c) {
+    // code here
+        int cnt=0;
+        int size=s.size();
+        int ans;        
+        for(int i=0;i<size;i++)
+            if(s[i]==c)
+                cnt++;
+                
+        ans=cnt* (n/size);
+        
+        for(int i=0;i< n%size;i++)
+        {
+            if(s[i]==c)
+                ans++;
+        }
+        return ans;
+    }
