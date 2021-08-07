@@ -1,0 +1,45 @@
+/***************
+Example 1:
+Input: N = 10, Q = 3
+a = {4, 7, 8, 5, 9, 6, 1, 0, 20, 10}
+query = {{3, 8},{1, 6},{2, 3}}
+Output: 
+29
+31
+17
+Explaination: For the first query: 
+The resulting array is: (4 ,7 ,20, 10).
+Their Xor will be: 29. 
+For the Second query: The resulting 
+array is: (1, 0, 20, 10). Their Xor 
+will be: 31. 
+For the Third query:  The resulting 
+array is: (4, 5, 9, 6, 1,0 ,20, 10). 
+Their Xor will be: 17.
+**************/
+
+
+/******************CODE**************/
+vector<int> specialXor(int N, int Q, int a[], vector<int> query[])
+    {
+        // code here
+        vector<int>ans;
+        
+        for(int i=0;i<Q;i++)
+        {
+            int l=query[i][0];
+            int r=query[i][1];
+            int temp=0;
+            int ind=0;
+            while(ind<N)
+            {
+                if((ind<(l-1) or ind>(r-1)))
+                {
+                    temp^=a[ind];
+                }
+                ind++;
+            }
+            ans.push_back(temp);
+        }
+        return ans;
+    }
