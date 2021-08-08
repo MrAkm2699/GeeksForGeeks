@@ -1,0 +1,48 @@
+/********
+Example 1:
+Input:
+A = YX, B = X, C = XXY
+Output: 0
+Explanation: XXY is not interleaving
+of YX and X
+
+Example 2:
+Input:
+A = XY, B = X, C = XXY
+Output: 1
+Explanation: XXY is interleaving of
+XY and X.
+******/
+
+/******************CODE***********DP********/
+int dp[101][101];
+bool isInterLeav(string A, string B, string C, int i, int j, int k)
+{
+    if (k==0)
+    return 1;
+    
+    if (dp[i][j] != -1)
+    return dp[i][j];
+    int a=0,b=0;
+    
+    if (i-1>=0 && A[i-1] == C[k-1])
+    a = isInterLeav(A, B, C, i - 1, j, k - 1);
+    
+    if (j-1 >=0 && B[j-1] == C[k-1])
+    
+    b = isInterLeav(A, B, C, i, j - 1, k - 1);
+    return dp[i][j] = a || b;
+    
+    }
+    
+    bool isInterleave(string A, string B, string C)
+    {
+        int i = A.size();
+        int j = B.size();
+        int k = C.size();
+        if(i+j!=k)
+            return 0;
+        memset(dp, -1, sizeof(dp));
+        
+        return isInterLeav(A, B, C, i, j, k);
+    }
