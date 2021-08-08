@@ -1,0 +1,30 @@
+/**********CODE*********/
+bool isRotated(string str1, string str2)
+    {
+        // Your code here
+    int l1=str1.length(),l2=str2.length(),f=0;
+        if(l1==1 && l2==1) 
+        {
+            if(str1==str2)
+            f=1;
+            
+        }
+        string left = str2,right=str2;
+        rotate(left.begin(), left.begin()+2, left.end());
+        rotate(right.begin(), right.end()-2, right.end());
+
+        if(left==str1 || right==str1 ||f==1) return 1;
+        else return 0;
+        
+        /*
+        bool isRotated(string str1, string str2)
+            {
+                if(str1.length() == 1 && str2.length() == 1)
+                {
+                    return str1[0] == str2[0];
+                }
+                string temp = str1 + str1;
+                return temp.find(str2) == 2 || str1.length()-temp.find(str2) == 2;
+            }
+        */
+    }
