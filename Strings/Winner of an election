@@ -1,0 +1,51 @@
+/***********
+Example 1:
+Input:
+n = 13
+Votes[] = {john,johnny,jackie,johnny,john 
+jackie,jamie,jamie,john,johnny,jamie,
+johnny,john}
+Output: john 4
+Explanation: john has 4 votes casted for 3him, but so does johny. john is 
+lexicographically smaller, so we print john and the votes he received.
+
+Example 2:
+Input:
+n = 3
+Votes[] = {andy,blake,clark}
+Output: andy 1
+Explanation: All the candidates get 1 
+votes each. We print andy as it is 
+lexicographically smaller.
+***********/
+
+/***************CODE********/
+ vector<string> winner(string arr[],int n)
+    {
+        // Your code here
+        // Return the string containing the name and an integer
+        // representing the number of votes the winning candidate got
+        map<string,int>m;
+        int ans=0;
+        string res;
+        for(int i=0;i<n;i++)
+        {
+            m[arr[i]]++;
+        }
+       
+       for(auto x :m)
+       {
+           if(x.second>ans)
+           {
+               ans=x.second;
+               res=x.first;
+           }
+       }
+       return {res,to_string(ans)};
+        /*
+        vector<string>v;
+        int ans=0;
+       
+        return to_string(ans);
+        */
+    }
