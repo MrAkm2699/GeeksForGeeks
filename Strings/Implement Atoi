@@ -1,0 +1,43 @@
+/******
+Example 1:
+Input:
+str = 123
+Output: 123
+
+Example 2:
+Input:
+str = 21a
+Output: -1
+Explanation: Output is -1 as all
+characters are not digit only.
+*******/
+
+
+/******************CODE*************/
+int atoi(string str) {
+        //Your code here
+        int num;
+        int mul=10;
+        int n=str.length();
+        int ans=0;int sign=0;
+        for(int i=0;i<n;i++)
+        {
+            if(isdigit(str[i]))
+            {
+                int num=str[i]-'0';
+                ans= ans*mul + num;
+                // mul*=10;
+            }
+            else if(str[i]=='-' and i==0)
+            {
+                sign=-1;
+            }
+            else
+                return -1;
+        }
+        if(sign!=0)
+        {
+            return ans*-1;
+        }
+        return ans;
+    }
