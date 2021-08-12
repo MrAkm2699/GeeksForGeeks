@@ -21,7 +21,7 @@ Output:
 0
 Explanation: Both strings are same.
 
-***********************CODE(TOP-DOWN)***************
+***********************CODE(TABULATION/BOTTOM-UP)***************
 
 int editDistance(string s, string t) 
     {
@@ -58,7 +58,7 @@ int editDistance(string s, string t)
             return dp[l1][l2];
         }
         
-***********************CODE(MEMOIZED)************
+***********************CODE(MEMOIZED/TOP-DOWN)************
 
 int dp[101][101];
 int ls(string s, string t, int i , int j) {
