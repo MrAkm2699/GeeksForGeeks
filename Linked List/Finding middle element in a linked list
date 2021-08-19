@@ -1,0 +1,18 @@
+/*********CODE*****Turtle-Hair approach*****/
+int getMiddle(Node *head)
+{
+   // Your code here
+   Node*slow=head;
+   Node*fast=head;
+   int ans;
+   if(head==NULL)
+    return -1;
+   while(fast!=NULL and fast->next!=NULL)
+   {
+       slow=slow->next;
+       fast=fast->next->next;
+   }
+
+    ans=slow->data;
+   return ans;
+}
