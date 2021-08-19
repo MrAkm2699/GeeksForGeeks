@@ -1,0 +1,56 @@
+/**************
+If there are multiple bottom-most nodes for a horizontal distance from root, then print the later one in level traversal. For example, in the below diagram, 3 and 4 are both 
+the bottommost nodes at horizontal distance 0, we need to print 4.
+
+                      20
+                    /    \
+                  8       22
+                /   \     /   \
+              5      3 4     25
+                     /    \      
+                 10       14
+
+Example 2:
+Input:
+         10
+       /    \
+      20    30
+     /  \
+    40   60
+Output: 40 20 60 30
+For the above tree the output should be 5 10 4 14 25.
+***************/
+
+/********************CODE*********/
+vector <int> bottomView(Node *root) {
+        // Your Code Here
+        map<int,int>m;
+        vector<int>ans;
+        int hd;                           //IMP
+        queue<pair<Node*,int>>q;          //IMP
+        q.push({root,0});
+        
+        while(!q.empty())
+        {
+            Node*temp = q.front().first;
+            hd = q.front().second;
+            int data=temp->data;
+            q.pop();
+            
+            m[hd]=data;
+            if(temp->left)
+                {
+                    q.push({temp->left,hd-1});
+                }
+            if(temp->right)
+                {
+                    q.push({temp->right,hd+1});
+                }
+        }
+        
+        for(auto x : m)
+        {
+            ans.push_back(x.second);
+        }
+        return ans;
+    }
