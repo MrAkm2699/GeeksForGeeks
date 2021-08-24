@@ -47,14 +47,20 @@ long long int substrCount (string s, int k) {
     }
     
     /***************CODE-2*****sliding window*********
-    long long int atmost (string s, int k) {
+     long long int atmost (string s, int k) {
 //code here.
 if(s.size()==0 || k==0) return 0;
 long long int c=0,ans=0,i=0,j=0,n=s.size();
 int f[26]={0};
-while(j<n){ f[s[j]-'a']++;="" if(f[s[j]-'a']="=1)c++;" while(i<="j" &&="" c="">k){
+while(j<n)
+{ 
+    f[s[j]-'a']++;
+    if(f[s[j]-'a']==1)
+    c++;
+    while(i<=j && c>k){
 f[s[i]-'a']--;
-if(f[s[i]-'a']==0)c--;
+if(f[s[i]-'a']==0)
+c--;
 i++;
 }
 ans+=(j-i+1);
