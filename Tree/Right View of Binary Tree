@@ -46,3 +46,42 @@ Output: 1 2
        
   return v;
     }
+    
+    
+    /**********************************CODE-2***************
+    
+    vector<int> leftView(Node *root)
+{
+   // Your code here
+   if(root==NULL)
+    return {};
+   vector<int>ans;
+    queue<Node*>q;
+    q.push(root);
+    int f=0;
+    Node*temp;
+   
+   while(!q.empty())
+   {
+       int size=q.size();
+       
+       while(size--)
+       {
+           temp=q.front();
+           q.pop();
+           if(f==0)
+            {
+                f++;
+                ans.push_back(temp->data);
+            }
+           if(temp->right)
+                q.push(temp->right);
+            if(temp->left)
+                q.push(temp->left);
+       }
+       f=0;
+   }
+    return ans;
+}
+    
+    ***************************************************/
