@@ -1,0 +1,40 @@
+/*********CODE**************find mid point of LL****then reverse half of it***********then check if != from head****/
+
+Node* reverse(Node*head)
+    {
+        Node*prev=NULL;
+        Node*curr=head,*temp=head;
+        
+        while(curr)
+        {
+            curr=temp->next;
+            temp->next=prev;
+            prev=temp;
+            temp=curr;
+        }
+        head=prev;
+        return head;
+    }
+    
+    bool isPalindrome(Node *head)
+    {
+        //Your code here
+        Node*slow=head,*fast=head;
+        
+        while(fast and fast->next)
+        {
+            slow=slow->next;
+            fast=fast->next->next;
+        }
+        
+        Node*revList=reverse(slow);
+        
+        while(revList and head)
+        {
+            if(revList->data!=head->data)
+                return 0;
+            revList=revList->next;
+            head=head->next;
+        }
+        return 1;
+    }
