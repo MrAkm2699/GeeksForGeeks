@@ -1,0 +1,55 @@
+/**************************
+
+***************************/
+
+/*********************CODE**************my code********/
+int height(Node*root)
+    {
+        if(root==NULL)
+            return 0;
+        int l=height(root->left);
+        int r=height(root->right);
+        
+        return max(l,r)+1;
+    }
+    
+    bool isBalanced(Node *root)
+    {
+        //  Your Code here
+        if(!root)
+            return 1;
+        int lh=height(root->left);
+        int lr=height(root->right);
+        
+        int d=abs(lh-lr);
+        if(d>1)
+            return 0;
+        
+        return isBalanced(root->left) and isBalanced(root->right);
+    }
+    
+    /**************code-2**************optimized**********
+    
+     bool flag;
+    int height(Node*root)
+    {
+        if(root==NULL)
+            return 0;
+        int l=height(root->left);
+        int r=height(root->right);
+        
+        if(abs(l-r)>1)
+            flag=0;
+        return max(l,r)+1;
+    }
+    
+    bool isBalanced(Node *root)
+    {
+        if(!root)
+            return 1;
+            flag=1;
+        height(root);
+        return flag;
+    }
+    
+    *****************************************************/
