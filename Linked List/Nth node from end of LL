@@ -18,7 +18,30 @@ the output is -1.
 *************/
 
 
-/****************CODE**************/
+/*************CODE*******Efficient************/
+
+int getNthFromLast(Node *head, int n)
+{
+    Node*front=head;
+    Node*back=head;
+    if(head==NULL)
+        return -1;
+    while(n--)
+    {
+        if(front==NULL)
+            return -1;
+        front=front->next;
+    }
+    
+    while(front!=NULL)
+    {
+        back=back->next;
+        front=front->next;
+    }
+    return back->data;
+    
+
+/****************CODE*************
 {
        int ans=0;
        Node*temp=head;
@@ -39,3 +62,4 @@ the output is -1.
        ans=temp->data;
        return ans;
 }
+*********************************/
