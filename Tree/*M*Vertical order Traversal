@@ -1,0 +1,37 @@
+/***************************
+
+****************************/
+
+
+/*************************cODE***************same as top-bottom concept*************use map<int,vector<int>>m*****/
+vector<int> verticalOrder(Node *root)
+    {
+        //Your code here
+        vector<int>ans;
+        queue<pair<Node*,int>>q;
+        map<int,vector<int>>m;
+        int h=0;
+        q.push({root,h});
+        
+        while(!q.empty())
+        {
+            Node*temp=q.front().first;
+            h=q.front().second;
+            int data=temp->data;
+            q.pop();
+            
+                m[h].push_back(data);
+            
+            if(temp->left)
+                q.push({temp->left,h-1});
+            if(temp->right)
+                q.push({temp->right,h+1});
+        }
+        
+        for(auto x : m)
+        {
+            for(int i=0; i<x.second.size(); i++)
+                ans.push_back(m[x.first][i]);
+        }
+        return ans;
+    }
