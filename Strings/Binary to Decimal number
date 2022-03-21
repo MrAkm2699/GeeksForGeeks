@@ -1,0 +1,32 @@
+/****************************
+
+Given a Binary Number B, find its decimal equivalent.
+ 
+
+Example 1:
+Input: B = 10001000
+Output: 136
+
+Example 2:
+Input: B = 101100
+Output: 44
+
+****************************/
+
+/****************CODE***************/
+int binary_to_decimal(string str)
+		{
+		    // Code here.
+		    int n=str.size();
+		    int p=0,ans=0;
+		    for(int i=n-1;i>=0;i--)
+		    {
+		        if(str[i]-'0'==1)
+		        {
+		            ans+=pow(2,p);
+		        }
+		        p++;
+		        
+		    }
+		    return ans;
+		}
